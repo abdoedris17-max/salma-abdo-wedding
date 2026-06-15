@@ -1,0 +1,14 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+
+# Claude Code / local preview config
+.claude/
+
+# Original art sources & project brief — kept locally, not part of the
+# published site (and not exposed in a public repo). Re-add if you want them
+# backed up in a private repo.
+Without Text/
+Sample With Text/
+CLAUDE-CODE-PROMPT.md

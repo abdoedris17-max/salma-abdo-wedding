@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Salma &amp; Abdo — 18 September 2026</title>
+  <meta name="description" content="Salma &amp; Abdo invite you to their wedding — Friday 18th September 2026, Cairo, Egypt." />
+  <meta name="theme-color" content="#1B2A4A" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Cormorant Garamond (400/500/600 + italics) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
+  />
+
+  <!-- Preload the hero art for a fast first paint -->
+  <link rel="preload" as="image" href="assets/hero.png" type="image/png" />
+
+  <link rel="stylesheet" href="styles.css?v=4" />
+</head>
+
+<body>
+  <!--
+    The whole invitation is ONE continuous, seamless vertical scroll: five
+    full-bleed images stacked with zero gap (no snapping, no dividers). Each
+    <section> = a full-width <img> whose natural aspect ratio sets its height,
+    with an absolutely-positioned text overlay on top. Everything is locked to
+    a max 480px column with container-type: inline-size, so the live text
+    (sized in cqw, positioned in %) scales in lockstep with the art at any width.
+  -->
+  <main class="site">
+
+    <!-- ============================ 1. HERO ============================ -->
+    <section class="screen" id="hero">
+      <!-- Hero ships the original full-res PNG (no WebP) so the pyramid stays
+           pixel-perfect at retina 1:1 on phones. -->
+      <picture>
+        <img src="assets/hero.png" width="1171" height="2518" alt=""
+             fetchpriority="high" decoding="async" />
+      </picture>
+
+      <div class="overlay">
+        <div class="hero-parents">
+          <p class="parent">Mr Sherif Farouk Osman<br />&amp; Mrs Soraya Abou Hussein</p>
+          <p class="parent">Mr Mohamed Edris<br />&amp; Mrs Nehal El Hennawy</p>
+        </div>
+
+        <div class="hero-main">
+          <p class="script">invite you to the wedding of</p>
+          <h1 class="names">Salma &amp; Abdo</h1>
+          <p class="date">Friday 18th September 2026</p>
+          <p class="place">Cairo &nbsp;|&nbsp; Egypt</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= 2. THE CELEBRATION ======================= -->
+    <section class="screen" id="celebration">
+      <picture>
+        <source srcset="assets/celebration.webp" type="image/webp" />
+        <img src="assets/celebration.png" width="1171" height="1724" alt=""
+             loading="lazy" decoding="async" />
+      </picture>
+
+      <div class="overlay">
+        <div class="cel-top">
+          <h2 class="title">The<br />Celebration</h2>
+          <p class="detail">Pyramids of Giza,</p>
+          <p class="detail">9 Pyramids Lounge</p>
+          <p class="detail">8PM</p>
+          <p class="dress">Black Tie</p>
+          <a class="btn btn--primary" data-map="venue" target="_blank" rel="noopener">Click for location</a>
+          <p class="kiss">Kiss your little ones good night</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= 3. CAIRO GUIDE ========================= -->
+    <section class="screen screen--dark" id="cairo-guide">
+      <picture>
+        <source srcset="assets/cairo-guide.webp" type="image/webp" />
+        <img src="assets/cairo-guide.png" width="1171" height="2128" alt=""
+             loading="lazy" decoding="async" />
+      </picture>
+
+      <div class="overlay">
+        <div class="cairo-top">
+          <div class="c-group">
+            <h2 class="title">Cairo Guide</h2>
+            <p class="intro">To make the trip as seamless as possible, we have curated a list of recommended hotels.</p>
+          </div>
+
+          <div class="c-group">
+            <h3 class="sub">Recommended Hotels</h3>
+
+          <div class="hotel">
+            <p class="hotel__name">Marriott Mena House <span class="hotel__tag">(Bride &amp; Groom stay)</span></p>
+            <a class="btn btn--primary" href="https://www.marriott.com/en-us/hotels/caimn-marriott-mena-house-cairo/overview/" target="_blank" rel="noopener">Click to view</a>
+            <a class="btn btn--secondary" data-special-rate="marriott" target="_blank" rel="noopener">Special rate</a>
+          </div>
+
+          <div class="hotel">
+            <p class="hotel__name">Hyatt Regency Cairo West</p>
+            <a class="btn btn--primary" href="https://www.hyatt.com/hyatt-regency/en-US/hberc-hyatt-regency-cairo-west" target="_blank" rel="noopener">Click to view</a>
+            <a class="btn btn--secondary" data-special-rate="hyatt" target="_blank" rel="noopener">Special rate</a>
+          </div>
+
+          <div class="hotel">
+            <p class="hotel__name">Four Seasons Hotel Cairo at Nile Plaza</p>
+            <a class="btn btn--primary" href="https://www.fourseasons.com/caironp/" target="_blank" rel="noopener">Click to view</a>
+          </div>
+
+          <div class="hotel">
+            <p class="hotel__name">Steigenberger Pyramids Cairo</p>
+            <a class="btn btn--primary" href="https://hrewards.com/en/steigenberger-pyramids-cairo" target="_blank" rel="noopener">Click to view</a>
+          </div>
+          </div>
+
+          <div class="c-group">
+            <h3 class="sub">Transport</h3>
+            <p class="intro" id="transportText"></p>
+            <div id="transportAction"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= 4. OUT & ABOUT ========================= -->
+    <section class="screen screen--dark" id="out-and-about">
+      <picture>
+        <source srcset="assets/out-and-about.webp" type="image/webp" />
+        <img src="assets/out-and-about.png" width="1171" height="2502" alt=""
+             loading="lazy" decoding="async" />
+      </picture>
+
+      <div class="overlay">
+        <div class="out-top">
+          <h2 class="title">Out &amp; About</h2>
+
+          <p class="intro">We&rsquo;re so excited to welcome you to our hometown. While you&rsquo;re here celebrating with us, we hope you&rsquo;ll take the opportunity to experience some of what makes Egypt special. Beyond Cairo, consider extending your trip by visiting the Nile through Luxor and Aswan, or staying there to experience the wonders of Ancient Egypt; enjoying the beautiful Red Sea destinations of El Gouna, Marsa Alam, or Sharm El Sheikh for beaches, diving and activity; relaxing on the white-sand beaches of the North Coast; or discovering the historical charm of Alexandria.</p>
+
+          <h3 class="sub">Sights</h3>
+          <p class="intro intro--tight">Cairo offers a journey through thousands of years of history, culture, and civilization.</p>
+          <ul class="places">
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Great+Pyramids+of+Giza" target="_blank" rel="noopener">Great Pyramids of Giza</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Step+Pyramid+of+Djoser+Saqqara" target="_blank" rel="noopener">Step Pyramid of Djoser, Saqqara</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Grand+Egyptian+Museum" target="_blank" rel="noopener">Grand Egyptian Museum</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Khan+El+Khalili" target="_blank" rel="noopener">Khan El Khalili &amp; Al Moez St.</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Mosque+of+Muhammad+Ali+Cairo+Citadel" target="_blank" rel="noopener">Citadel &amp; Mohamed Ali Mosque</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Hanging+Church+Coptic+Cairo" target="_blank" rel="noopener">Religious Quarter &amp; Hanging Church</a></li>
+          </ul>
+
+          <h3 class="sub">Restaurants</h3>
+          <ul class="places">
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Sachi+Park+St+Cairo" target="_blank" rel="noopener">Sachi Park St.</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Khufu's+Restaurant+Giza" target="_blank" rel="noopener">Khufu&rsquo;s</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Andrea+New+Giza" target="_blank" rel="noopener">Andrea New Giza</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Pier88+Cairo" target="_blank" rel="noopener">Pier88</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Carlos+Zamalek" target="_blank" rel="noopener">Carlos Zamalek</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Majeez+Balad+Cairo" target="_blank" rel="noopener">Majeez Balad</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Zooba+Cairo" target="_blank" rel="noopener">Zooba</a></li>
+            <li><a href="https://www.google.com/maps/search/?api=1&query=Kasr+El+Kababgy+Cairo" target="_blank" rel="noopener">Kasr El Kababgy</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ 5. RSVP ============================ -->
+    <section class="screen" id="rsvp">
+      <picture>
+        <source srcset="assets/rsvp.webp?v=4" type="image/webp" />
+        <img src="assets/rsvp.png?v=4" width="1171" height="1331" alt=""
+             loading="lazy" decoding="async" />
+      </picture>
+
+      <div class="overlay">
+        <div class="rsvp-main">
+          <h2 class="title">RSVP</h2>
+          <p class="script">We can&rsquo;t wait to celebrate with you.</p>
+          <a class="btn btn--primary" id="rsvpButton" data-rsvp target="_blank" rel="noopener">RSVP here</a>
+          <p class="rsvp-pending" id="rsvpPending" hidden>RSVP link coming soon</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js?v=4"></script>
+</body>
+</html>
