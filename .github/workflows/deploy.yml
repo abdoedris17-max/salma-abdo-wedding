@@ -28,6 +28,8 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true        # turns on Pages automatically on first run
 
       # The site is plain static files at the repo root — upload them as-is.
       - name: Upload site
