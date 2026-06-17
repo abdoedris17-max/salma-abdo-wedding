@@ -4,13 +4,19 @@
    zero gap, each with an absolutely-positioned live-text overlay. Text is sized
    in cqw and positioned in %, locked to a max-480px column, so it scales in
    lockstep with the art and lands identically at 360 / 390 / 480px.
-   Two colours only: deep navy + cream. One font: Cormorant Garamond.
+   Palette: deep navy + cream + dark grey (#333). Fonts: Cormorant Garamond, plus
+   Minion (names/headers) & Orpheus Pro (parents/date) — see :root font tokens.
    ========================================================================== */
 
 :root {
   --navy: #1B2A4A;
   --cream: #F5F0E8;
+  --ink: #333333;                     /* dark grey — parents' names + date (designer) */
   --font: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  /* Couple's names + section headers — Minion Pro (display cut), bold, via Adobe Fonts. */
+  --font-display: "minion-pro-display", "Cormorant Garamond", Georgia, serif;
+  /* Parents' names + date — Orpheus Pro, via Adobe Fonts. */
+  --font-accent: "orpheuspro", "Cormorant Garamond", Georgia, serif;
 
   /* Soft haloes that keep text crisp over busy art (used sparingly) */
   --halo-light: 0 1px 2px rgba(245, 240, 232, 0.55), 0 0 10px rgba(245, 240, 232, 0.35);
@@ -20,11 +26,15 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body { margin: 0; padding: 0; }
+/* Stop iOS rubber-band overscroll from revealing the page background past the
+   ends of the invitation (the "blue screen" after RSVP). */
+html { overscroll-behavior-y: none; }
 
 body {
-  background: var(--navy);            /* surround on screens wider than the column */
+  background: var(--cream);           /* light, on-palette surround (was navy) */
   font-family: var(--font);
   color: var(--navy);
+  overscroll-behavior-y: none;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -60,8 +70,24 @@ body {
 .overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;                         /* text sits above the animated pyramid */
   line-height: normal;                /* reset the wrapper's line-height:0 */
 }
+/* Animated pyramid overlay — sits between the image and the text. Position is
+   tuned to land on the painted pyramid in the merged hero image. */
+#hero .pyramid-anim {
+  position: absolute;
+  z-index: 1;
+  top: 27%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  aspect-ratio: 971 / 961;
+  border: 0;
+  background: transparent;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) { #hero .pyramid-anim { display: none; } }
 
 a { color: inherit; }
 
@@ -71,16 +97,18 @@ a { color: inherit; }
 .names, .title, .sub, .detail, .dress, .script, .intro,
 .parent, .kiss, .hotel__name, .places a, .btn { margin: 0; }
 
-.names {                              /* hero couple */
-  font-weight: 600;
+.names {                              /* hero couple — Minion, display bold */
+  font-family: var(--font-display);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.0;
   font-size: 2.2rem;
   font-size: 9.4cqw;
 }
-.title {                              /* section titles */
-  font-weight: 600;
+.title {                              /* section headers — Minion, display bold */
+  font-family: var(--font-display);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   line-height: 1.02;
@@ -126,12 +154,13 @@ a { color: inherit; }
 }
 .intro--tight { line-height: 1.3; }
 
-.parent {                            /* hero parents — bold + legibility-critical */
+.parent {                            /* hero parents — Orpheus Pro bold, dark grey */
+  font-family: var(--font-accent);
   font-weight: 700;
+  color: var(--ink);
   line-height: 1.4;
   font-size: 0.8rem;
-  font-size: 2.95cqw;
-  text-shadow: var(--halo-light);
+  font-size: 2.82cqw;                /* ~11px on a phone */
 }
 .kiss {                              /* "Kiss your little ones…" — legibility-critical */
   font-style: italic;
@@ -147,7 +176,6 @@ a { color: inherit; }
 .screen--dark .title,
 .screen--dark .sub,
 .screen--dark .intro,
-.screen--dark .hotel__name,
 .screen--dark .places a { text-shadow: var(--halo-dark); }
 
 /* ---------------------------------------------------------------------------
@@ -158,30 +186,29 @@ a { color: inherit; }
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  text-transform: uppercase;
   text-align: center;
   font-family: var(--font);
   font-weight: 600;
+  font-style: italic;                /* designer: semibold italic, title-case */
   white-space: nowrap;
   border-radius: 999px;
   background: var(--navy);
-  color: var(--cream);
+  color: #c4a289;                    /* tan label (designer) */
   border: 1px solid var(--navy);
-  letter-spacing: 0.16em;
+  letter-spacing: 0.03em;
   line-height: 1;
-  padding: 0.7em 1.5em;
-  font-size: 0.72rem;
-  font-size: 2.75cqw;
+  padding: 0.6em 1.35em;
+  font-size: 0.78rem;
+  font-size: 3.05cqw;                /* designer: ~12px on a phone */
   box-shadow: 0 0.4cqw 1.4cqw rgba(27, 42, 74, 0.30);
 }
 .btn--secondary {
-  background: rgba(27, 42, 74, 0.85);
-  border-color: var(--cream);
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  padding: 0.58em 1.2em;
+  background: rgba(27, 42, 74, 0.82);
+  border-color: #c4a289;
+  letter-spacing: 0.02em;
+  padding: 0.5em 1.1em;
   font-size: 0.66rem;
-  font-size: 2.45cqw;
+  font-size: 2.6cqw;
 }
 .btn.is-placeholder { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
 
@@ -190,7 +217,7 @@ a { color: inherit; }
    ========================================================================= */
 #hero .hero-parents {
   position: absolute;
-  top: 25.5%;
+  top: 14%;
   left: 0; right: 0;
   padding: 0 7%;
   display: grid;
@@ -200,15 +227,19 @@ a { color: inherit; }
 }
 #hero .hero-main {
   position: absolute;
-  top: 31.5%;
+  top: 18%;
   left: 50%;
   transform: translateX(-50%);
   width: 92%;
   text-align: center;
 }
 #hero .names { margin-top: 0.08em; }
-#hero .date { margin-top: 0.55em; font-weight: 600; text-transform: uppercase;
-              letter-spacing: 0.14em; font-size: 3.5cqw; }
+/* "invite you to the wedding of" — italic, ~9px (designer) */
+#hero .script { font-size: 2.31cqw; }
+/* Date — Orpheus Pro bold, dark grey, ~12px (a bit bigger than parents) */
+#hero .date { margin-top: 0.55em; font-family: var(--font-accent); font-weight: 700;
+              color: var(--ink); text-transform: uppercase;
+              letter-spacing: 0.14em; font-size: 3.08cqw; }
 /* CAIRO | EGYPT — a touch larger, tighter tracking + halo so it reads clearly */
 #hero .place { margin-top: 0.45em; font-weight: 600; text-transform: uppercase;
                letter-spacing: 0.2em; font-size: 3.45cqw; text-shadow: var(--halo-light); }
@@ -216,36 +247,36 @@ a { color: inherit; }
 /* ===========================================================================
    2. THE CELEBRATION  (content rides the upper, lighter half)
    ========================================================================= */
-#celebration .cel-top {
+#hero .cel-top {
   position: absolute;
-  top: 3.5%;
+  top: 60.5%;                        /* lower blue band of the merged image */
   left: 50%;
   transform: translateX(-50%);
   width: 92%;
   text-align: center;
   isolation: isolate;               /* contain the scrim below */
 }
-/* Soft cream glow lifts the navy text off the busy palm-tree artwork behind it */
-#celebration .cel-top::before {
+/* Soft cream glow lifts the navy text off the busy palm/blue artwork behind it */
+#hero .cel-top::before {
   content: "";
   position: absolute;
-  inset: -4% -6% -8% -6%;
+  inset: -5% -8% -8% -8%;
   z-index: -1;
-  background: radial-gradient(ellipse 76% 60% at 50% 34%,
-              rgba(245, 240, 232, 0.55) 0%,
-              rgba(245, 240, 232, 0.32) 44%,
-              rgba(245, 240, 232, 0) 72%);
+  background: radial-gradient(ellipse 82% 64% at 50% 42%,
+              rgba(245, 240, 232, 0.62) 0%,
+              rgba(245, 240, 232, 0.36) 46%,
+              rgba(245, 240, 232, 0) 74%);
   pointer-events: none;
 }
-#celebration .title,
-#celebration .detail,
-#celebration .dress,
-#celebration .kiss { text-shadow: var(--halo-light); }
-#celebration .title { margin-bottom: 0.8em; }
-#celebration .detail { margin-bottom: 0.3em; }
-#celebration .dress { margin-top: 0.55em; }
-#celebration .btn { margin-top: 1.05em; }
-#celebration .kiss { margin-top: 1.05em; }
+#hero .cel-top .title,
+#hero .cel-top .detail,
+#hero .cel-top .dress,
+#hero .cel-top .kiss { text-shadow: var(--halo-light); }
+#hero .cel-top .title { margin-bottom: 0.8em; }
+#hero .cel-top .detail { margin-bottom: 0.3em; }
+#hero .cel-top .dress { margin-top: 0.55em; }
+#hero .cel-top .btn { margin-top: 1.05em; }
+#hero .cel-top .kiss { margin-top: 1.05em; }
 
 /* ===========================================================================
    3. CAIRO GUIDE  (content rides the central dark olive panel)
@@ -259,9 +290,12 @@ a { color: inherit; }
   text-align: center;
 }
 #cairo-guide .c-group + .c-group { margin-top: 4.5cqw; }
-#cairo-guide .title { margin-bottom: 0.3em; }
-#cairo-guide .intro { margin: 0 auto; max-width: 30ch; }
-#cairo-guide .sub { margin-bottom: 0.7em; font-size: 4.8cqw; letter-spacing: 0.04em; }
+#cairo-guide .title { margin-bottom: 0.3em; color: #c0d7e1; }
+#cairo-guide .intro { margin: 0 auto; max-width: 30ch; color: #c0d7e1; }
+#cairo-guide .sub { margin-bottom: 0.7em; font-size: 5.38cqw; font-weight: 700;
+                    letter-spacing: 0.02em; color: #530a25;
+                    /* soft cream halo so the dark maroon reads on the olive panel */
+                    text-shadow: 0 0 9px rgba(245,240,232,0.85), 0 1px 2px rgba(245,240,232,0.6); }
 
 .hotel {
   display: flex;
@@ -271,8 +305,8 @@ a { color: inherit; }
   margin-bottom: 2.8cqw;
 }
 .hotel:last-of-type { margin-bottom: 0; }
-.hotel__name { font-style: italic; font-weight: 500; line-height: 1.25;
-               font-size: 3.2cqw; margin-bottom: 0.8cqw; }
+.hotel__name { font-style: italic; font-weight: 600; line-height: 0.86; color: #c0d7e1;
+               font-size: 3.59cqw; margin-bottom: 0.8cqw; }  /* ~14px, leading 12, no shadow */
 .hotel__tag { display: block; font-size: 0.82em; opacity: 0.92; }
 .hotel .btn { margin: 0; }
 
@@ -290,9 +324,10 @@ a { color: inherit; }
   text-align: center;
 }
 #out-and-about .title { margin-bottom: 0.4em; }
-#out-and-about .intro { margin: 0 auto 0.45em; max-width: 40ch; line-height: 1.32; font-size: 3.0cqw; }
+#out-and-about .intro { margin: 0 auto 0.45em; max-width: 40ch; line-height: 1.17; font-size: 3.08cqw; color: #f5f0e8; }
 #out-and-about .intro--tight { margin-bottom: 0.3em; }
-#out-and-about .sub { margin-top: 0.6em; margin-bottom: 0.25em; }
+#out-and-about .sub { margin-top: 0.6em; margin-bottom: 0.25em; font-size: 5.38cqw;
+                      font-weight: 700; color: #c4a289; }
 
 .places { list-style: none; margin: 0; padding: 0; }
 .places li { margin: 0; }
@@ -300,11 +335,13 @@ a { color: inherit; }
   display: inline-block;
   text-decoration: none;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 600;                  /* designer: semibold italic */
   line-height: 1.18;
-  padding: 0.38cqw 1cqw;
-  font-size: 3.05cqw;
+  padding: 0.34cqw 1cqw;
+  font-size: 3.59cqw;                /* ~14px */
 }
+.places--sights a { color: #faeac3; }
+.places--restaurants a { color: #5b1c30; }
 
 /* ===========================================================================
    5. RSVP
