@@ -1,375 +1,65 @@
 /* ============================================================================
    Salma & Abdo — Wedding invitation
-   ONE seamless, continuous vertical scroll: five full-bleed images stacked with
-   zero gap, each with an absolutely-positioned live-text overlay. Text is sized
-   in cqw and positioned in %, locked to a max-480px column, so it scales in
-   lockstep with the art and lands identically at 360 / 390 / 480px.
-   Palette: deep navy + cream + dark grey (#333). Fonts: Cormorant Garamond, plus
-   Minion (names/headers) & Orpheus Pro (parents/date) — see :root font tokens.
+   The invitation is ONE tall illustration (text baked in), shown full-width in a
+   centered phone-width column, with an invisible layer of <a> "hotspots" over the
+   printed link labels. Hotspots are positioned in % of the image (inline in HTML),
+   so they track the artwork at every width.
    ========================================================================== */
-
-:root {
-  --navy: #1B2A4A;
-  --cream: #F5F0E8;
-  --ink: #333333;                     /* dark grey — parents' names + date (designer) */
-  --font: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
-  /* Couple's names + section headers — Minion Pro (display cut), bold, via Adobe Fonts. */
-  --font-display: "minion-pro-display", "Cormorant Garamond", Georgia, serif;
-  /* Parents' names + date — Orpheus Pro, via Adobe Fonts. */
-  --font-accent: "orpheuspro", "Cormorant Garamond", Georgia, serif;
-
-  /* Soft haloes that keep text crisp over busy art (used sparingly) */
-  --halo-light: 0 1px 2px rgba(245, 240, 232, 0.55), 0 0 10px rgba(245, 240, 232, 0.35);
-  --halo-dark: 0 1px 3px rgba(18, 10, 14, 0.60), 0 0 12px rgba(18, 10, 14, 0.35);
-}
 
 *, *::before, *::after { box-sizing: border-box; }
 
 html, body { margin: 0; padding: 0; }
-/* Stop iOS rubber-band overscroll from revealing the page background past the
-   ends of the invitation (the "blue screen" after RSVP). */
 html { overscroll-behavior-y: none; }
 
 body {
-  background: var(--cream);           /* light, on-palette surround (was navy) */
-  font-family: var(--font);
-  color: var(--navy);
-  overscroll-behavior-y: none;
+  background: var(--cream, #F5F0E8);   /* light surround on screens wider than the column */
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
-/* The whole invitation lives in this centred column and is the query container. */
+:root { --navy: #1B2A4A; --cream: #F5F0E8; }
+
+/* Centered phone-width column (image is 781px → downscales crisp at <=480) */
 .site {
   max-width: 480px;
   margin: 0 auto;
-  background: #cfe0e6;                /* hero-sky tint; hides any pre-load flash */
-  container-type: inline-size;
+  background: #bcd7df;                  /* matches the illustration's top sky */
 }
 
-/* ---- Seamless sections: image defines the height, overlay holds the text ---- */
-.screen {
-  position: relative;
-  width: 100%;
+/* The illustration */
+.invitation { position: relative; width: 100%; line-height: 0; }
+.invitation__img { display: block; width: 100%; height: auto; }
+
+/* Invisible clickable layer over the baked-in labels */
+.hotspots { position: absolute; inset: 0; }
+.hotspot {
+  position: absolute;
   display: block;
-  margin: 0;
-  line-height: 0;                     /* kill inline-image whitespace */
-  overflow: hidden;                   /* clip scrims/decor to the section box */
+  background: transparent;             /* invisible */
+  cursor: pointer;
+  border-radius: 8px;
+  -webkit-tap-highlight-color: transparent;
 }
-.screen picture,
-.screen img {
-  display: block;
-  width: 100%;
-  height: auto;                       /* natural aspect ratio = section height */
-  vertical-align: bottom;
-}
-/* Overlap each section 2px over the previous so sub-pixel rounding / stray edge
-   rows can never leave a hairline seam between the stacked images. */
-.screen + .screen { margin-top: -2px; }
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;                         /* text sits above the animated pyramid */
-  line-height: normal;                /* reset the wrapper's line-height:0 */
-}
-/* Animated pyramid overlay — sits between the image and the text. Position is
-   tuned to land on the painted pyramid in the merged hero image. */
-#hero .pyramid-anim {
-  position: absolute;
-  z-index: 1;
-  top: 27%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  aspect-ratio: 971 / 961;
-  border: 0;
-  background: transparent;
-  pointer-events: none;
-}
-@media (prefers-reduced-motion: reduce) { #hero .pyramid-anim { display: none; } }
-
-a { color: inherit; }
-
-/* ---------------------------------------------------------------------------
-   Shared type (all sizes in cqw so they track the column width)
-   ------------------------------------------------------------------------- */
-.names, .title, .sub, .detail, .dress, .script, .intro,
-.parent, .kiss, .hotel__name, .places a, .btn { margin: 0; }
-
-.names {                              /* hero couple — Minion, display bold */
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  line-height: 1.0;
-  font-size: 2.2rem;
-  font-size: 9.4cqw;
-}
-.title {                              /* section headers — Minion, display bold */
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  line-height: 1.02;
-  font-size: 2rem;
-  font-size: 8.8cqw;
-}
-.sub {                               /* RECOMMENDED HOTELS / SIGHTS / etc. */
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  line-height: 1.1;
-  font-size: 1.3rem;
-  font-size: 5.6cqw;
-}
-.detail {                            /* venue / time caps lines */
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  line-height: 1.32;
-  font-size: 1.05rem;
-  font-size: 4.4cqw;
-}
-.dress {                             /* "Black Tie" */
-  font-weight: 600;
-  color: var(--navy);
-  letter-spacing: 0.01em;
-  font-size: 1.15rem;
-  font-size: 4.9cqw;
-}
-.script {                            /* italic "invite you…" / RSVP line */
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  font-size: 0.95rem;
-  font-size: 3.5cqw;
-}
-.intro {                             /* italic paragraphs */
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.46;
-  font-size: 0.85rem;
-  font-size: 3.2cqw;
-}
-.intro--tight { line-height: 1.3; }
-
-.parent {                            /* hero parents — Orpheus Pro bold, dark grey */
-  font-family: var(--font-accent);
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.4;
-  font-size: 0.8rem;
-  font-size: 2.82cqw;                /* ~11px on a phone */
-}
-.kiss {                              /* "Kiss your little ones…" — legibility-critical */
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.3;
-  font-size: 0.9rem;
-  font-size: 3.4cqw;
-  text-shadow: var(--halo-light);
-}
-
-/* Dark-artwork screens use cream text + a dark halo for crispness */
-.screen--dark .overlay { color: var(--cream); }
-.screen--dark .title,
-.screen--dark .sub,
-.screen--dark .intro,
-.screen--dark .places a { text-shadow: var(--halo-dark); }
-
-/* ---------------------------------------------------------------------------
-   Buttons — navy pill, cream letter-spaced caps. Primary + smaller secondary.
-   ------------------------------------------------------------------------- */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  text-align: center;
-  font-family: var(--font);
-  font-weight: 600;
-  font-style: italic;                /* designer: semibold italic, title-case */
-  white-space: nowrap;
-  border-radius: 999px;
-  background: var(--navy);
-  color: #c4a289;                    /* tan label (designer) */
-  border: 1px solid var(--navy);
-  letter-spacing: 0.03em;
-  line-height: 1;
-  padding: 0.6em 1.35em;
-  font-size: 0.78rem;
-  font-size: 3.05cqw;                /* designer: ~12px on a phone */
-  box-shadow: 0 0.4cqw 1.4cqw rgba(27, 42, 74, 0.30);
-}
-.btn--secondary {
-  background: rgba(27, 42, 74, 0.82);
-  border-color: #c4a289;
-  letter-spacing: 0.02em;
-  padding: 0.5em 1.1em;
-  font-size: 0.66rem;
-  font-size: 2.6cqw;
-}
-.btn.is-placeholder { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
-
-/* ===========================================================================
-   1. HERO
-   ========================================================================= */
-#hero .hero-parents {
-  position: absolute;
-  top: 14%;
-  left: 0; right: 0;
-  padding: 0 7%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6%;
-  text-align: center;
-}
-#hero .hero-main {
-  position: absolute;
-  top: 18%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 92%;
-  text-align: center;
-}
-#hero .names { margin-top: 0.08em; }
-/* "invite you to the wedding of" — italic, ~9px (designer) */
-#hero .script { font-size: 2.31cqw; }
-/* Date — Orpheus Pro bold, dark grey, ~12px (a bit bigger than parents) */
-#hero .date { margin-top: 0.55em; font-family: var(--font-accent); font-weight: 700;
-              color: var(--ink); text-transform: uppercase;
-              letter-spacing: 0.14em; font-size: 3.08cqw; }
-/* CAIRO | EGYPT — a touch larger, tighter tracking + halo so it reads clearly */
-#hero .place { margin-top: 0.45em; font-weight: 600; text-transform: uppercase;
-               letter-spacing: 0.2em; font-size: 3.45cqw; text-shadow: var(--halo-light); }
-
-/* ===========================================================================
-   2. THE CELEBRATION  (content rides the upper, lighter half)
-   ========================================================================= */
-#hero .cel-top {
-  position: absolute;
-  top: 60.5%;                        /* lower blue band of the merged image */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 92%;
-  text-align: center;
-  isolation: isolate;               /* contain the scrim below */
-}
-/* Soft cream glow lifts the navy text off the busy palm/blue artwork behind it */
-#hero .cel-top::before {
-  content: "";
-  position: absolute;
-  inset: -5% -8% -8% -8%;
-  z-index: -1;
-  background: radial-gradient(ellipse 82% 64% at 50% 42%,
-              rgba(245, 240, 232, 0.62) 0%,
-              rgba(245, 240, 232, 0.36) 46%,
-              rgba(245, 240, 232, 0) 74%);
-  pointer-events: none;
-}
-#hero .cel-top .title,
-#hero .cel-top .detail,
-#hero .cel-top .dress,
-#hero .cel-top .kiss { text-shadow: var(--halo-light); }
-#hero .cel-top .title { margin-bottom: 0.8em; }
-#hero .cel-top .detail { margin-bottom: 0.3em; }
-#hero .cel-top .dress { margin-top: 0.55em; }
-#hero .cel-top .btn { margin-top: 1.05em; }
-#hero .cel-top .kiss { margin-top: 1.05em; }
-
-/* ===========================================================================
-   3. CAIRO GUIDE  (content rides the central dark olive panel)
-   ========================================================================= */
-#cairo-guide .cairo-top {
-  position: absolute;
-  top: 3.2%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 62%;                       /* stay inside the central green panel */
-  text-align: center;
-}
-#cairo-guide .c-group + .c-group { margin-top: 4.5cqw; }
-#cairo-guide .title { margin-bottom: 0.3em; color: #c0d7e1; }
-#cairo-guide .intro { margin: 0 auto; max-width: 30ch; color: #c0d7e1; }
-#cairo-guide .sub { margin-bottom: 0.7em; font-size: 5.38cqw; font-weight: 700;
-                    letter-spacing: 0.02em; color: #530a25;
-                    /* soft cream halo so the dark maroon reads on the olive panel */
-                    text-shadow: 0 0 9px rgba(245,240,232,0.85), 0 1px 2px rgba(245,240,232,0.6); }
-
-.hotel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1cqw;
-  margin-bottom: 2.8cqw;
-}
-.hotel:last-of-type { margin-bottom: 0; }
-.hotel__name { font-style: italic; font-weight: 600; line-height: 0.86; color: #c0d7e1;
-               font-size: 3.59cqw; margin-bottom: 0.8cqw; }  /* ~14px, leading 12, no shadow */
-.hotel__tag { display: block; font-size: 0.82em; opacity: 0.92; }
-.hotel .btn { margin: 0; }
-
-#cairo-guide #transportAction:not(:empty) { margin-top: 0.8em; }
-
-/* ===========================================================================
-   4. OUT & ABOUT  (the most content — compact, centred, over the maroon)
-   ========================================================================= */
-#out-and-about .out-top {
-  position: absolute;
-  top: 19%;                          /* title sits well into the deep-red area */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 88%;
-  text-align: center;
-}
-#out-and-about .title { margin-bottom: 0.4em; }
-#out-and-about .intro { margin: 0 auto 0.45em; max-width: 40ch; line-height: 1.17; font-size: 3.08cqw; color: #f5f0e8; }
-#out-and-about .intro--tight { margin-bottom: 0.3em; }
-#out-and-about .sub { margin-top: 0.6em; margin-bottom: 0.25em; font-size: 5.38cqw;
-                      font-weight: 700; color: #c4a289; }
-
-.places { list-style: none; margin: 0; padding: 0; }
-.places li { margin: 0; }
-.places a {
-  display: inline-block;
-  text-decoration: none;
-  font-style: italic;
-  font-weight: 600;                  /* designer: semibold italic */
-  line-height: 1.18;
-  padding: 0.34cqw 1cqw;
-  font-size: 3.59cqw;                /* ~14px */
-}
-.places--sights a { color: #faeac3; }
-.places--restaurants a { color: #5b1c30; }
-
-/* ===========================================================================
-   5. RSVP
-   ========================================================================= */
-#rsvp .rsvp-main {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  text-align: center;
-  color: var(--navy);
-}
-#rsvp .title { letter-spacing: 0.05em; }
-#rsvp .script { margin-top: 0.7em; }
-#rsvp .btn { margin-top: 1.1em; }
-#rsvp .rsvp-pending { margin-top: 0.6em; font-style: italic; font-size: 2.6cqw; opacity: 0.8; }
-
-/* ---------------------------------------------------------------------------
-   Accessibility
-   ------------------------------------------------------------------------- */
-a:focus-visible, .btn:focus-visible {
-  outline: 2px solid var(--navy);
+.hotspot:focus-visible {
+  outline: 3px solid var(--navy);
   outline-offset: 2px;
-  border-radius: 6px;
 }
-.screen--dark a:focus-visible { outline-color: var(--cream); }
+.hotspot[aria-disabled="true"] { cursor: default; }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+/* Alignment aid: add ?debug=1 to the URL to tint every hotspot red. */
+.hotspots.is-debug .hotspot {
+  background: rgba(255, 0, 80, 0.35);
+  outline: 1px solid #ff0050;
 }
+
+/* Visually-hidden text for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

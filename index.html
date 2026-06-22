@@ -5,189 +5,138 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Salma &amp; Abdo — 18 September 2026</title>
   <meta name="description" content="Salma &amp; Abdo invite you to their wedding — Friday 18th September 2026, Cairo, Egypt." />
-  <meta name="theme-color" content="#1B2A4A" />
+  <meta name="theme-color" content="#bcd7df" />
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 
-  <!-- Cormorant Garamond (400/500/600 + italics) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
-  />
-  <!-- Adobe Fonts (Typekit): Minion Pro (display) + Orpheus Pro -->
-  <link rel="preconnect" href="https://use.typekit.net" crossorigin />
-  <link rel="stylesheet" href="https://use.typekit.net/lec2pzm.css" />
-
-  <!-- Preload the hero art for a fast first paint -->
-  <link rel="preload" as="image" href="assets/hero-celebration.webp" type="image/webp" />
-
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <!-- The whole invitation is one image now (text is baked in), so no web fonts. -->
+  <link rel="preload" as="image" href="assets/invitation.webp?v=1" type="image/webp" />
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 
 <body>
   <!--
-    The whole invitation is ONE continuous, seamless vertical scroll: five
-    full-bleed images stacked with zero gap (no snapping, no dividers). Each
-    <section> = a full-width <img> whose natural aspect ratio sets its height,
-    with an absolutely-positioned text overlay on top. Everything is locked to
-    a max 480px column with container-type: inline-size, so the live text
-    (sized in cqw, positioned in %) scales in lockstep with the art at any width.
+    The invitation is ONE tall illustration with all text baked in. We show it
+    full-width in a centered phone-width column, and lay an invisible layer of
+    <a> "hotspots" over the printed link labels/buttons so they're tappable. Each
+    hotspot is positioned in % of the image, so it tracks the artwork at any width.
+    To re-align a hotspot later, append ?debug=1 to the URL to tint them red.
+    Swap-later URLs live in CONFIG at the top of script.js.
   -->
   <main class="site">
-
-    <!-- ================== 1. HERO + THE CELEBRATION ==================== -->
-    <!-- One continuous merged image (Hero+Celebration) so there's no seam
-         between them. Hero text rides the top sky; the celebration text rides
-         the lower blue band; the animated pyramid overlays the static one. -->
-    <section class="screen" id="hero">
+    <div class="invitation">
       <picture>
-        <source srcset="assets/hero-celebration.webp" type="image/webp" />
-        <img src="assets/hero-celebration.jpg" width="1171" height="4175" alt=""
+        <source srcset="assets/invitation.webp?v=1" type="image/webp" />
+        <img class="invitation__img" src="assets/invitation.jpg?v=1"
+             width="781" height="7427"
+             alt="Salma & Abdo wedding invitation — Friday 18th September 2026, Cairo, Egypt."
              fetchpriority="high" decoding="async" />
       </picture>
 
-      <!-- Animated golden ripple over the painted pyramid (decorative).
-           A transparent canvas (no iframe → no opaque box on iOS). -->
-      <canvas class="pyramid-anim" id="pyramidCanvas" aria-hidden="true"></canvas>
+      <!-- Invisible clickable layer. top/left/width/height are % of the image. -->
+      <nav class="hotspots" aria-label="Invitation links">
 
-      <div class="overlay">
-        <div class="hero-parents">
-          <p class="parent">Mr Sherif Farouk Osman<br />&amp; Mrs Soraya Abou Hussein</p>
-          <p class="parent">Mr Mohamed Edris<br />&amp; Mrs Nehal El Hennawy</p>
-        </div>
+        <!-- Venue (THE WEDDING → "Click for location") -->
+        <a class="hotspot" data-map="venue" target="_blank" rel="noopener"
+           aria-label="Open the venue location in Google Maps"
+           style="top:27.5%; left:39.5%; width:23.5%; height:0.7%;"></a>
 
-        <div class="hero-main">
-          <p class="script">invite you to the wedding of</p>
-          <h1 class="names">Salma &amp; Abdo</h1>
-          <p class="date">Friday 18th September 2026</p>
-          <p class="place">Cairo &nbsp;|&nbsp; Egypt</p>
-        </div>
+        <!-- CAIRO GUIDE — Recommended hotels (navy pills) -->
+        <a class="hotspot" target="_blank" rel="noopener"
+           href="https://www.marriott.com/en-us/hotels/caimn-marriott-mena-house-cairo/overview/"
+           aria-label="View Marriott Mena House"
+           style="top:42.25%; left:39.5%; width:23.5%; height:0.45%;"></a>
+        <a class="hotspot" data-special-rate="marriott" target="_blank" rel="noopener"
+           aria-label="Marriott Mena House special rate"
+           style="top:42.78%; left:39.5%; width:23.5%; height:0.45%;"></a>
 
-        <div class="cel-top">
-          <h2 class="title">The<br />Celebration</h2>
-          <p class="detail">Pyramids of Giza,</p>
-          <p class="detail">9 Pyramids Lounge</p>
-          <p class="detail">8PM</p>
-          <p class="dress">Black Tie</p>
-          <a class="btn btn--primary" data-map="venue" target="_blank" rel="noopener">Click for location</a>
-          <p class="kiss">Kiss your little ones good night</p>
-        </div>
-      </div>
-    </section>
+        <a class="hotspot" target="_blank" rel="noopener"
+           href="https://www.hyatt.com/hyatt-regency/en-US/hberc-hyatt-regency-cairo-west"
+           aria-label="View Hyatt Regency Cairo West"
+           style="top:44.08%; left:39.5%; width:23.5%; height:0.45%;"></a>
+        <a class="hotspot" data-special-rate="hyatt" target="_blank" rel="noopener"
+           aria-label="Hyatt Regency special rate"
+           style="top:44.62%; left:39.5%; width:23.5%; height:0.45%;"></a>
 
-    <!-- ========================= 3. CAIRO GUIDE ========================= -->
-    <section class="screen screen--dark" id="cairo-guide">
-      <picture>
-        <source srcset="assets/cairo-guide.webp" type="image/webp" />
-        <img src="assets/cairo-guide.png" width="1171" height="2128" alt=""
-             loading="lazy" decoding="async" />
-      </picture>
+        <a class="hotspot" target="_blank" rel="noopener"
+           href="https://www.fourseasons.com/caironp/"
+           aria-label="View Four Seasons Hotel Cairo at Nile Plaza"
+           style="top:45.92%; left:39.5%; width:23.5%; height:0.45%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener"
+           href="https://www.fourseasons.com/caironp/"
+           aria-label="View Four Seasons Hotel Cairo at Nile Plaza"
+           style="top:47.22%; left:39.5%; width:23.5%; height:0.45%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener"
+           href="https://hrewards.com/en/steigenberger-pyramids-cairo"
+           aria-label="View Steigenberger Pyramids Cairo"
+           style="top:48.52%; left:39.5%; width:23.5%; height:0.45%;"></a>
+        <a class="hotspot" data-hotel="crowne" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&query=Crowne+Plaza+Cairo+Arkan"
+           aria-label="View Crowne Plaza Arkan"
+           style="top:49.80%; left:39.5%; width:23.5%; height:0.45%;"></a>
 
-      <div class="overlay">
-        <div class="cairo-top">
-          <div class="c-group">
-            <h2 class="title">Cairo Guide</h2>
-            <p class="intro">To make the trip as seamless as possible, we have curated a list of recommended hotels.</p>
-          </div>
+        <!-- OUT & ABOUT — Sights (centred text lines) -->
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Great Pyramids of Giza in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Great+Pyramids+of+Giza"
+           style="top:71.75%; left:22%; width:56%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Step Pyramid of Djoser, Saqqara in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Step+Pyramid+of+Djoser+Saqqara"
+           style="top:72.48%; left:22%; width:56%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Grand Egyptian Museum in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Grand+Egyptian+Museum"
+           style="top:73.15%; left:22%; width:56%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Khan El Khalili and Al Moez St. in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Khan+El+Khalili"
+           style="top:73.89%; left:22%; width:56%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Citadel and Mohamed Ali Mosque in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Mosque+of+Muhammad+Ali+Cairo+Citadel"
+           style="top:74.63%; left:22%; width:56%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Religious Quarter and Hanging Church in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Hanging+Church+Coptic+Cairo"
+           style="top:75.37%; left:22%; width:56%; height:0.55%;"></a>
 
-          <div class="c-group">
-            <h3 class="sub">Recommended Hotels</h3>
+        <!-- OUT & ABOUT — Restaurants (centred text lines) -->
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Sachi Park St. in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Sachi+Park+St+Cairo"
+           style="top:77.95%; left:28%; width:44%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Khufu's in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Khufu's+Restaurant+Giza"
+           style="top:78.62%; left:28%; width:44%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Andrea New Giza in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Andrea+New+Giza"
+           style="top:79.29%; left:28%; width:44%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Pier88 in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Pier88+Cairo"
+           style="top:79.94%; left:28%; width:44%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Carlos Zamalek in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Carlos+Zamalek"
+           style="top:80.61%; left:28%; width:44%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Mazeej Balad in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Mazeej+Balad+Cairo"
+           style="top:81.29%; left:28%; width:44%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Zooba in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Zooba+Cairo"
+           style="top:81.92%; left:28%; width:44%; height:0.55%;"></a>
+        <a class="hotspot" target="_blank" rel="noopener" aria-label="Kasr El Kababgy in Maps"
+           href="https://www.google.com/maps/search/?api=1&query=Kasr+El+Kababgy+Cairo"
+           style="top:82.53%; left:28%; width:44%; height:0.55%;"></a>
 
-          <div class="hotel">
-            <p class="hotel__name">Marriott Mena House <span class="hotel__tag">(Bride &amp; Groom stay)</span></p>
-            <a class="btn btn--primary" href="https://www.marriott.com/en-us/hotels/caimn-marriott-mena-house-cairo/overview/" target="_blank" rel="noopener">Click to view</a>
-            <a class="btn btn--secondary" data-special-rate="marriott" target="_blank" rel="noopener">Special rate</a>
-          </div>
+        <!-- RSVP (text, no button — covers the heading + tagline) -->
+        <a class="hotspot" data-rsvp target="_blank" rel="noopener"
+           aria-label="RSVP"
+           style="top:93.5%; left:24%; width:52%; height:3.5%;"></a>
+      </nav>
+    </div>
 
-          <div class="hotel">
-            <p class="hotel__name">Hyatt Regency Cairo West</p>
-            <a class="btn btn--primary" href="https://www.hyatt.com/hyatt-regency/en-US/hberc-hyatt-regency-cairo-west" target="_blank" rel="noopener">Click to view</a>
-            <a class="btn btn--secondary" data-special-rate="hyatt" target="_blank" rel="noopener">Special rate</a>
-          </div>
-
-          <div class="hotel">
-            <p class="hotel__name">Four Seasons Hotel Cairo at Nile Plaza</p>
-            <a class="btn btn--primary" href="https://www.fourseasons.com/caironp/" target="_blank" rel="noopener">Click to view</a>
-          </div>
-
-          <div class="hotel">
-            <p class="hotel__name">Steigenberger Pyramids Cairo</p>
-            <a class="btn btn--primary" href="https://hrewards.com/en/steigenberger-pyramids-cairo" target="_blank" rel="noopener">Click to view</a>
-          </div>
-          </div>
-
-          <div class="c-group">
-            <h3 class="sub">Transport</h3>
-            <p class="intro" id="transportText"></p>
-            <div id="transportAction"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= 4. OUT & ABOUT ========================= -->
-    <section class="screen screen--dark" id="out-and-about">
-      <picture>
-        <source srcset="assets/out-and-about.webp" type="image/webp" />
-        <img src="assets/out-and-about.png" width="1171" height="2502" alt=""
-             loading="lazy" decoding="async" />
-      </picture>
-
-      <div class="overlay">
-        <div class="out-top">
-          <h2 class="title">Out &amp; About</h2>
-
-          <p class="intro">We&rsquo;re so excited to welcome you to our hometown. While you&rsquo;re here celebrating with us, we hope you&rsquo;ll take the opportunity to experience some of what makes Egypt special. Beyond Cairo, consider extending your trip by visiting the Nile through Luxor and Aswan, or staying there to experience the wonders of Ancient Egypt; enjoying the beautiful Red Sea destinations of El Gouna, Marsa Alam, or Sharm El Sheikh for beaches, diving and activity; relaxing on the white-sand beaches of the North Coast; or discovering the historical charm of Alexandria.</p>
-
-          <h3 class="sub">Sights</h3>
-          <p class="intro intro--tight">Cairo offers a journey through thousands of years of history, culture, and civilization.</p>
-          <ul class="places places--sights">
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Great+Pyramids+of+Giza" target="_blank" rel="noopener">Great Pyramids of Giza</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Step+Pyramid+of+Djoser+Saqqara" target="_blank" rel="noopener">Step Pyramid of Djoser, Saqqara</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Grand+Egyptian+Museum" target="_blank" rel="noopener">Grand Egyptian Museum</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Khan+El+Khalili" target="_blank" rel="noopener">Khan El Khalili &amp; Al Moez St.</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Mosque+of+Muhammad+Ali+Cairo+Citadel" target="_blank" rel="noopener">Citadel &amp; Mohamed Ali Mosque</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Hanging+Church+Coptic+Cairo" target="_blank" rel="noopener">Religious Quarter &amp; Hanging Church</a></li>
-          </ul>
-
-          <h3 class="sub">Restaurants</h3>
-          <ul class="places places--restaurants">
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Sachi+Park+St+Cairo" target="_blank" rel="noopener">Sachi Park St.</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Khufu's+Restaurant+Giza" target="_blank" rel="noopener">Khufu&rsquo;s</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Andrea+New+Giza" target="_blank" rel="noopener">Andrea New Giza</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Pier88+Cairo" target="_blank" rel="noopener">Pier88</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Carlos+Zamalek" target="_blank" rel="noopener">Carlos Zamalek</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Mazeej+Balad+Cairo" target="_blank" rel="noopener">Mazeej Balad</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Zooba+Cairo" target="_blank" rel="noopener">Zooba</a></li>
-            <li><a href="https://www.google.com/maps/search/?api=1&query=Kasr+El+Kababgy+Cairo" target="_blank" rel="noopener">Kasr El Kababgy</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ 5. RSVP ============================ -->
-    <section class="screen" id="rsvp">
-      <picture>
-        <source srcset="assets/rsvp.webp?v=4" type="image/webp" />
-        <img src="assets/rsvp.png?v=4" width="1171" height="1331" alt=""
-             loading="lazy" decoding="async" />
-      </picture>
-
-      <div class="overlay">
-        <div class="rsvp-main">
-          <h2 class="title">RSVP</h2>
-          <p class="script">We can&rsquo;t wait to celebrate with you.</p>
-          <a class="btn btn--primary" id="rsvpButton" data-rsvp target="_blank" rel="noopener">RSVP here</a>
-          <p class="rsvp-pending" id="rsvpPending" hidden>RSVP link coming soon</p>
-        </div>
-      </div>
-    </section>
-
+    <!-- Screen-reader text (the invite is now pictorial) -->
+    <p class="sr-only">
+      Mr Sherif Farouk Osman &amp; Mrs Soraya Abou Hussein, and Mr Mohamed Edris &amp;
+      Mrs Nehal El Hennawy, invite you to the wedding of Salma &amp; Abdo on Friday
+      18th September 2026 in Cairo, Egypt. Use the links on the invitation for the venue,
+      recommended hotels, things to do, and to RSVP.
+    </p>
   </main>
 
-  <script src="script.js?v=4"></script>
-  <script src="assets/pyramid-anim.js?v=1" defer></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
