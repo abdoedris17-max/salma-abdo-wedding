@@ -50,16 +50,19 @@ body {
   transform: translate3d(0, var(--py), 0) scaleX(var(--sx));
 }
 .deco.flip { --sx: -1; }
-.deco.palm    { --amp: -8px; }          /* idle float peak offsets, by type */
-.deco.floral  { --amp: -7px; }
-.deco.disc    { --amp: -6px; }
-.deco.star    { --amp: -5px; }
-.deco.sparkle { --amp: -5px; }
+/* Idle float peak offsets, by type — kept very small so nothing drifts off its spot. */
+.deco.palm    { --amp: -4px; }
+.deco.floral  { --amp: -3px; }
+.deco.disc    { --amp: -3px; }
+.deco.star    { --amp: -3px; }
+.deco.sparkle { --amp: -2px; }
+.deco.moon    { --amp: -3px; }
+.deco.lantern { --amp: -2px; }
 
 /* When JS enables motion it adds .deco-anim to <body>: hide, then reveal on scroll. */
 .deco-anim .deco {
   opacity: 0;
-  transform: translate3d(0, 16px, 0) scaleX(var(--sx));
+  transform: translate3d(0, 10px, 0) scaleX(var(--sx));   /* gentle rise on entrance */
   will-change: transform, opacity;
 }
 .deco-anim .deco.is-in {                /* soft entrance: fade + small rise */
