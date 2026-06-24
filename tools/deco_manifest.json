@@ -1,13 +1,12 @@
 {
   "_note": "Animated cutouts over the no-assets base. The base already has palms/discs/fronds BAKED IN, so we only add the genuinely-removed assets: hero branch+stars (good), the moon (enlarged), the lanterns, and the faded star cluster (extracted from the OG). top/left/width = % of base (1177x12067). 'extract' entries are cropped from Artboard 11@2.f5.png with a diff/luminance alpha. class drives animation. build-assets.py exports assets/deco/<slug>.webp + tools/deco_tags.html.",
   "deco": [
-    {"slug": "branch-top-left",   "src": "Asset 31@2x.png", "top": -1.0,  "left": -4.0,  "width": 42.0, "class": "floral",  "flip": false},
+    {"slug": "branch-top-left",   "src": "Asset 31@2x.png", "top": -2.0,  "left": -5.0,  "width": 47.0, "class": "floral",  "flip": false},
     {"slug": "stars-names",       "src": "Asset 36@2x.png", "top": 5.5,   "left": 36.0,  "width": 12.0, "class": "sparkle", "flip": false},
     {"slug": "star-names-2",      "src": "Asset 22@2x.png", "top": 5.5,   "left": 31.0,  "width": 5.0,  "class": "star",    "flip": false},
-    {"slug": "moon-top-right",    "src": "Asset 29@2x.png", "top": 0.2,   "left": 52.5,  "width": 37.5, "class": "moon",    "flip": false},
-    {"slug": "lantern-out-left",  "src": "Asset 45@2x.png", "top": 62.0,  "left": 12.0,  "width": 4.5,  "class": "lantern", "flip": false},
-    {"slug": "lantern-out-mid",   "src": "Asset 47@2x.png", "top": 70.0,  "left": 19.0,  "width": 3.5,  "class": "lantern", "flip": false},
-    {"slug": "lantern-out-right", "src": "Asset 46@2x.png", "top": 61.0,  "left": 86.0,  "width": 4.5,  "class": "lantern", "flip": false},
+    {"slug": "moon-top-right",    "src": "Asset 29@2x.png", "top": 0.2,   "left": 51.0,  "width": 42.0, "class": "moon",    "flip": false},
+    {"slug": "lantern-out-left",  "src": "Asset 45@2x.png", "top": 61.5,  "left": 16.0,  "width": 4.5,  "class": "lantern", "flip": false},
+    {"slug": "lantern-out-right", "src": "Asset 46@2x.png", "top": 57.5,  "left": 82.0,  "width": 4.5,  "class": "lantern", "flip": false},
     {"slug": "stars-restaurants", "extract": true, "ogLeft": 0.0, "ogTop": 79.0, "ogW": 22.0, "ogH": 4.6, "top": 79.0, "left": 0.0, "width": 22.0, "class": "star", "flip": false}
   ]
 }

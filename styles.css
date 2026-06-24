@@ -55,7 +55,7 @@ body {
 .deco.palm    { transform-origin: 50% 94%; }  /* palms sway from the trunk base */
 .deco.lantern { transform-origin: 50% 6%;  }  /* lanterns swing from the top */
 .deco.moon    { transform-origin: 50% 50%;
-  filter: drop-shadow(0 0 11px rgba(228, 212, 165, 0.45)); }  /* soft halo like the OG */
+  filter: drop-shadow(0 0 20px rgba(232, 216, 168, 0.55)); }  /* soft halo like the OG */
 
 /* When JS enables motion it adds .deco-anim to <body>: hide, then reveal on scroll. */
 .deco-anim .deco {
@@ -89,8 +89,8 @@ body {
 .deco-anim .deco.is-paused { animation-play-state: paused; }  /* off-screen */
 
 @keyframes moon-spin     { to      { rotate: 360deg; } }
-@keyframes moon-glow     { 0%,100% { filter: drop-shadow(0 0 8px rgba(228,212,165,.35)); }
-                           50%      { filter: drop-shadow(0 0 16px rgba(228,212,165,.6)); } }
+@keyframes moon-glow     { 0%,100% { filter: drop-shadow(0 0 14px rgba(232,216,168,.45)); }
+                           50%      { filter: drop-shadow(0 0 26px rgba(232,216,168,.7)); } }
 @keyframes leaf-sway     { 0%,100% { rotate: -2.4deg; } 50% { rotate: 2.4deg; } }
 @keyframes palm-sway     { 0%,100% { rotate: -1.4deg; } 50% { rotate: 1.4deg; } }
 @keyframes lantern-swing { 0%,100% { rotate: -3deg;   } 50% { rotate: 3deg;   } }
