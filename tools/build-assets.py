@@ -84,10 +84,15 @@ def build_deco():
             x0 = int(it["ogLeft"] / 100 * ow); y0 = int(it["ogTop"] / 100 * oh)
             x1 = int((it["ogLeft"] + it["ogW"]) / 100 * ow); y1 = int((it["ogTop"] + it["ogH"]) / 100 * oh)
             ogc = og_a[y0:y1, x0:x1]; bsc = base_a[y0:y1, x0:x1]
-            diff = np.abs(ogc - bsc).max(axis=2)
-            alpha = np.clip((diff - 8) * 7, 0, 255).astype(np.uint8)
+            if it.get("alpha") == "sky":             # keep everything that isn't the light-blue sky
+                r, g, b = ogc[..., 0], ogc[..., 1], ogc[..., 2]
+                sky = (b > r + 8) & (r > 150) & (b > 188)
+                alpha = np.where(sky, 0, 255).astype(np.uint8); blur = 1.2
+            else:                                    # default: alpha = difference vs the base
+                diff = np.abs(ogc - bsc).max(axis=2)
+                alpha = np.clip((diff - 8) * 7, 0, 255).astype(np.uint8); blur = 0.6
             im = Image.fromarray(ogc.astype(np.uint8), "RGB").convert("RGBA")
-            im.putalpha(Image.fromarray(alpha, "L").filter(ImageFilter.GaussianBlur(0.6)))
+            im.putalpha(Image.fromarray(alpha, "L").filter(ImageFilter.GaussianBlur(blur)))
             cb = im.getchannel("A").getbbox()
             if cb is None:
                 print(f"  {slug:<26} EMPTY extract — skipped"); continue

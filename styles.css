@@ -54,8 +54,7 @@ body {
 .deco.floral  { transform-origin: 22% 12%; }  /* branch sways from where it attaches */
 .deco.palm    { transform-origin: 50% 94%; }  /* palms sway from the trunk base */
 .deco.lantern { transform-origin: 50% 6%;  }  /* lanterns swing from the top */
-.deco.moon    { transform-origin: 50% 50%;
-  filter: drop-shadow(0 0 20px rgba(232, 216, 168, 0.55)); }  /* soft halo like the OG */
+.deco.moon    { transform-origin: 35% 45%; }   /* pivot at the moon's centre (fronds are to its right) */
 
 /* When JS enables motion it adds .deco-anim to <body>: hide, then reveal on scroll. */
 .deco-anim .deco {
@@ -79,7 +78,7 @@ body {
 /* Idle motion, per asset type — applied after the entrance, paused off-screen.
    Everything is a tiny rotation (or opacity) around the anchored position, so an
    asset never drifts away from where the original artwork placed it. */
-.deco-anim .deco.is-idle.moon    { animation: moon-spin 210s linear infinite, moon-glow 9s ease-in-out infinite; }
+.deco-anim .deco.is-idle.moon    { animation: moon-sway 13s ease-in-out infinite, moon-shimmer 7s ease-in-out infinite; }
 .deco-anim .deco.is-idle.floral  { animation: leaf-sway     var(--dur, 7s) ease-in-out var(--fdelay, 0s) infinite; }
 .deco-anim .deco.is-idle.palm    { animation: palm-sway     var(--dur, 8s) ease-in-out var(--fdelay, 0s) infinite; }
 .deco-anim .deco.is-idle.lantern { animation: lantern-swing var(--dur, 4.5s) ease-in-out var(--fdelay, 0s) infinite; }
@@ -88,9 +87,8 @@ body {
 /* discs: no idle motion — they just fade in and stay put (no spin). */
 .deco-anim .deco.is-paused { animation-play-state: paused; }  /* off-screen */
 
-@keyframes moon-spin     { to      { rotate: 360deg; } }
-@keyframes moon-glow     { 0%,100% { filter: drop-shadow(0 0 14px rgba(232,216,168,.45)); }
-                           50%      { filter: drop-shadow(0 0 26px rgba(232,216,168,.7)); } }
+@keyframes moon-sway     { 0%,100% { rotate: -1.2deg; } 50% { rotate: 1.2deg; } }
+@keyframes moon-shimmer  { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.06); } }
 @keyframes leaf-sway     { 0%,100% { rotate: -2.4deg; } 50% { rotate: 2.4deg; } }
 @keyframes palm-sway     { 0%,100% { rotate: -1.4deg; } 50% { rotate: 1.4deg; } }
 @keyframes lantern-swing { 0%,100% { rotate: -3deg;   } 50% { rotate: 3deg;   } }
