@@ -51,7 +51,7 @@ def build_base():
     base = img.convert("RGB").resize((BASE_W, out_h), Image.LANCZOS)
     webp = OUT / "invitation.webp"
     jpg = OUT / "invitation.jpg"
-    base.save(webp, "WEBP", quality=WEBP_QUALITY, method=6)
+    base.save(webp, "WEBP", quality=WEBP_QUALITY, method=4)
     base.save(jpg, "JPEG", quality=JPEG_QUALITY, optimize=True, progressive=True)
     print(f"BASE source {sw}x{sh} -> web {BASE_W}x{out_h}")
     print(f"  invitation.webp (q{WEBP_QUALITY}) = {kb(webp):6.0f} KB")
@@ -111,7 +111,7 @@ def build_deco():
             im = im.resize((target_px, round(ch * target_px / cw)), Image.LANCZOS)
         ew, eh = im.size
         p = DECO_OUT / f"{slug}.webp"
-        im.save(p, "WEBP", quality=DECO_QUALITY, method=6)
+        im.save(p, "WEBP", quality=DECO_QUALITY, method=4)
         size = kb(p); total += size
         print(f"  {slug:<26} {ew:>4}x{eh:<4} = {size:6.1f} KB   (top {top:.1f} left {left:.1f} w {width:.1f}%)")
 
@@ -134,6 +134,8 @@ def build_deco():
 
 
 if __name__ == "__main__":
-    build_base()
+    import sys
+    if "deco" not in sys.argv:           # pass 'deco' to skip the (slow) base re-encode
+        build_base()
     build_deco()
     print("\nDone -> assets/  (zoom the text to verify crispness; bump ?v= in index.html)")
