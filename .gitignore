@@ -19,12 +19,14 @@ assets_2x_png_version_only_blues_and_greens_pages_1/
 # Heavy source illustration (kept locally, never committed)
 assets/Artboard 11@2f2x.PNG
 
-# New "no assets" artboard 16 sources + the cutout library (kept local, never
-# committed — ~22 MB; only the compressed assets/invitation.* + assets/deco/*.webp ship)
+# Heavy source artboards & legacy cutout library (kept local, never committed —
+# only the compressed assets/invitation.* ship to the site)
 Artboard No assets/
 assets/Artboard 16@2.f5 no assets.png
 assets/Artboard 16@3.f no assets.png
 Artboard 11@2.f5.png
+Artboard 11@2x version final final.png
+Artboard 11@3x version final final.png
 
 # Reference screenshots the user sent (kept local, not part of the published site)
 screenshots of current*/

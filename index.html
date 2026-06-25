@@ -9,17 +9,15 @@
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 
-  <!-- The invitation is one baked-text illustration; decorative pieces float over it. -->
-  <link rel="preload" as="image" href="assets/invitation.webp?v=2" type="image/webp" />
-  <link rel="stylesheet" href="styles.css?v=15" />
+  <!-- The invitation is one baked illustration; invisible links sit over the printed labels. -->
+  <link rel="preload" as="image" href="assets/invitation.webp?v=3" type="image/webp" />
+  <link rel="stylesheet" href="styles.css?v=16" />
 </head>
 
 <body>
   <!--
-    The invitation is ONE tall illustration with all text baked in (assets/invitation.webp).
-    Over it sit two layers:
-      .deco-layer  — the decorative cutouts (palms / discs / florals / stars), gently animated.
-                     Always pointer-events:none and BELOW the links so taps pass through.
+    The invitation is ONE tall illustration with all text and decoration baked in (assets/invitation.webp).
+    Over it sits one layer:
       .hotspots    — an invisible layer of <a> links over the printed labels/buttons, each
                      positioned in % of the image so it tracks the artwork at any width.
     Re-align a hotspot later by appending ?debug=1 to the URL (tints them red).
@@ -28,27 +26,12 @@
   <main class="site">
     <div class="invitation">
       <picture>
-        <source srcset="assets/invitation.webp?v=2" type="image/webp" />
-        <img class="invitation__img" src="assets/invitation.jpg?v=2"
-             width="960" height="9842"
+        <source srcset="assets/invitation.webp?v=3" type="image/webp" />
+        <img class="invitation__img" src="assets/invitation.jpg?v=3"
+             width="960" height="9392"
              alt="Salma & Abdo wedding invitation — Friday 18th September 2026, 9 Arena, Pyramids of Giza, Cairo, Egypt."
              fetchpriority="high" decoding="async" />
       </picture>
-
-      <!-- Animated decorative cutouts (ornamental; generated from tools/deco_manifest.json). -->
-      <div class="deco-layer" aria-hidden="true">
-        <img class="deco floral" src="assets/deco/branch-top-left.webp?v=8" width="411" height="413" style="--top:-1.0%;--left:-1.0%;--w:49.0%;--dur:8.0s;--fdelay:-0.0s;--edelay:0.0s" loading="lazy" decoding="async" alt="">
-        <img class="deco moon" src="assets/deco/moon-top-right.webp?v=8" width="365" height="344" style="--top:0.5%;--left:52.0%;--w:37.0%;--dur:8.4s;--fdelay:-0.47s;--edelay:0.12s" loading="lazy" decoding="async" alt="">
-        <img class="deco palm" src="assets/deco/fronds-top-right.webp?v=8" width="323" height="642" style="--top:-6.0%;--left:86.0%;--w:20.0%;--dur:9.3s;--fdelay:-0.94s;--edelay:0.24s" loading="lazy" decoding="async" alt="">
-        <img class="deco palm" src="assets/deco/tree-hero-left.webp?v=8" width="323" height="642" style="--top:5.5%;--left:-2.0%;--w:17.0%;--dur:8.5s;--fdelay:-1.41s;--edelay:0.36s" loading="lazy" decoding="async" alt="">
-        <img class="deco palm" src="assets/deco/tree-wedding-left.webp?v=8" width="323" height="642" style="--top:19.0%;--left:-1.0%;--w:21.0%;--dur:8.9s;--fdelay:-1.88s;--edelay:0.48s" loading="lazy" decoding="async" alt="">
-        <img class="deco palm" src="assets/deco/tree-transport-left.webp?v=8" width="323" height="642" style="--top:52.0%;--left:-1.0%;--w:21.0%;--dur:9.3s;--fdelay:-2.35s;--edelay:0.6s" loading="lazy" decoding="async" alt="">
-        <img class="deco lantern" src="assets/deco/lantern-out-lower.webp?v=8" width="37" height="67" style="--top:70.0%;--left:16.5%;--w:5.0%;--dur:4.5s;--fdelay:-2.82s;--edelay:0.0s" loading="lazy" decoding="async" alt="">
-        <img class="deco lantern" src="assets/deco/lantern-out-right.webp?v=8" width="51" height="86" style="--top:58.8%;--left:84.5%;--w:5.0%;--dur:4.9s;--fdelay:-3.29s;--edelay:0.12s" loading="lazy" decoding="async" alt="">
-        <img class="deco palm flip" src="assets/deco/tree-rest-right.webp?v=8" width="323" height="642" style="--top:72.0%;--left:77.0%;--w:23.0%;--dur:9.3s;--fdelay:-3.76s;--edelay:0.24s" loading="lazy" decoding="async" alt="">
-        <img class="deco star" src="assets/deco/stars-restaurants.webp?v=8" width="171" height="351" style="--top:78.99%;--left:0.0%;--w:21.9%;--dur:6.5s;--fdelay:-0.23s;--edelay:0.36s" loading="lazy" decoding="async" alt="">
-        <img class="deco palm" src="assets/deco/tree-rsvp-right.webp?v=8" width="323" height="642" style="--top:85.0%;--left:75.0%;--w:25.0%;--dur:8.9s;--fdelay:-0.7s;--edelay:0.48s" loading="lazy" decoding="async" alt="">
-      </div>
 
       <!-- Invisible clickable layer. top/left/width/height are % of the image. -->
       <nav class="hotspots" aria-label="Invitation links">
@@ -56,95 +39,95 @@
         <!-- THE WEDDING — "CLICK FOR LOCATION" (9 Arena, Pyramids of Giza) -->
         <a class="hotspot" data-map="venue" target="_blank" rel="noopener"
            aria-label="Open the venue location (9 Arena, Pyramids of Giza) in Google Maps"
-           style="top:24.35%; left:40.0%; width:22.3%; height:0.50%;"></a>
+           style="top:26.46%; left:40.0%; width:22.3%; height:0.60%;"></a>
 
         <!-- CAIRO GUIDE — Recommended hotels (navy pills) -->
         <a class="hotspot" target="_blank" rel="noopener"
            href="https://www.marriott.com/en-us/hotels/caimn-marriott-mena-house-cairo/overview/"
            aria-label="View Marriott Mena House"
-           style="top:38.91%; left:40.0%; width:22.3%; height:0.42%;"></a>
+           style="top:40.96%; left:40.0%; width:22.3%; height:0.46%;"></a>
         <a class="hotspot" data-special-rate="marriott" target="_blank" rel="noopener"
            aria-label="Marriott Mena House special rate"
-           style="top:39.40%; left:40.0%; width:22.3%; height:0.42%;"></a>
+           style="top:41.48%; left:40.0%; width:22.3%; height:0.46%;"></a>
 
         <a class="hotspot" target="_blank" rel="noopener"
            href="https://www.hyatt.com/hyatt-regency/en-US/hberc-hyatt-regency-cairo-west"
            aria-label="View Hyatt Regency Cairo West"
-           style="top:40.60%; left:40.0%; width:22.3%; height:0.42%;"></a>
+           style="top:42.74%; left:40.0%; width:22.3%; height:0.46%;"></a>
         <a class="hotspot" data-special-rate="hyatt" target="_blank" rel="noopener"
            aria-label="Hyatt Regency special rate"
-           style="top:41.10%; left:40.0%; width:22.3%; height:0.42%;"></a>
+           style="top:43.26%; left:40.0%; width:22.3%; height:0.46%;"></a>
 
         <a class="hotspot" target="_blank" rel="noopener"
            href="https://www.fourseasons.com/caironp/"
            aria-label="View Four Seasons Hotel Cairo at Nile Plaza"
-           style="top:42.29%; left:40.0%; width:22.3%; height:0.42%;"></a>
+           style="top:44.52%; left:40.0%; width:22.3%; height:0.46%;"></a>
         <a class="hotspot" data-hotel="giza-palace" target="_blank" rel="noopener"
            href="https://www.google.com/maps/search/?api=1&query=Giza+Palace+Hotel+Cairo"
            aria-label="View Giza Palace"
-           style="top:43.47%; left:40.0%; width:22.3%; height:0.42%;"></a>
+           style="top:45.77%; left:40.0%; width:22.3%; height:0.46%;"></a>
         <a class="hotspot" target="_blank" rel="noopener"
            href="https://hrewards.com/en/steigenberger-pyramids-cairo"
            aria-label="View Steigenberger Pyramids Cairo"
-           style="top:44.67%; left:40.0%; width:22.3%; height:0.42%;"></a>
+           style="top:47.03%; left:40.0%; width:22.3%; height:0.46%;"></a>
         <a class="hotspot" data-hotel="crowne" target="_blank" rel="noopener"
            href="https://www.google.com/maps/search/?api=1&query=Crowne+Plaza+Cairo+Arkan"
            aria-label="View Crowne Plaza Arkan"
-           style="top:45.86%; left:40.0%; width:22.3%; height:0.42%;"></a>
+           style="top:48.29%; left:40.0%; width:22.3%; height:0.46%;"></a>
 
         <!-- OUT & ABOUT — Sights (centred text lines) -->
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Great Pyramids of Giza in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Great+Pyramids+of+Giza"
-           style="top:66.68%; left:21%; width:58%; height:0.55%;"></a>
+           style="top:70.25%; left:21%; width:58%; height:0.60%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Step Pyramid of Djoser, Saqqara in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Step+Pyramid+of+Djoser+Saqqara"
-           style="top:67.31%; left:21%; width:58%; height:0.55%;"></a>
+           style="top:71.00%; left:21%; width:58%; height:0.60%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Grand Egyptian Museum in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Grand+Egyptian+Museum"
-           style="top:68.01%; left:21%; width:58%; height:0.55%;"></a>
+           style="top:71.70%; left:21%; width:58%; height:0.60%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Khan El Khalili and Al Moez St. in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Khan+El+Khalili"
-           style="top:68.64%; left:21%; width:58%; height:0.55%;"></a>
+           style="top:72.45%; left:21%; width:58%; height:0.60%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Citadel and Mohamed Ali Mosque in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Mosque+of+Muhammad+Ali+Cairo+Citadel"
-           style="top:69.31%; left:21%; width:58%; height:0.55%;"></a>
+           style="top:73.15%; left:21%; width:58%; height:0.60%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Religious Quarter and Hanging Church in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Hanging+Church+Coptic+Cairo"
-           style="top:69.93%; left:21%; width:58%; height:0.55%;"></a>
+           style="top:73.85%; left:21%; width:58%; height:0.60%;"></a>
 
         <!-- OUT & ABOUT — Restaurants (centred text lines) -->
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Sachi Park St. in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Sachi+Park+St+Cairo"
-           style="top:72.47%; left:26%; width:48%; height:0.50%;"></a>
+           style="top:75.91%; left:26%; width:48%; height:0.58%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Khufu's in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Khufu%27s+Restaurant+Giza"
-           style="top:73.07%; left:26%; width:48%; height:0.50%;"></a>
+           style="top:76.61%; left:26%; width:48%; height:0.58%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Andrea New Giza in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Andrea+New+Giza"
-           style="top:73.66%; left:26%; width:48%; height:0.50%;"></a>
+           style="top:77.26%; left:26%; width:48%; height:0.58%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Pier88 in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Pier88+Cairo"
-           style="top:74.26%; left:26%; width:48%; height:0.50%;"></a>
+           style="top:77.96%; left:26%; width:48%; height:0.58%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Carlos Zamalek in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Carlos+Zamalek"
-           style="top:74.85%; left:26%; width:48%; height:0.50%;"></a>
+           style="top:78.61%; left:26%; width:48%; height:0.58%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Mazeej Balad in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Mazeej+Balad+Cairo"
-           style="top:75.44%; left:26%; width:48%; height:0.50%;"></a>
+           style="top:79.26%; left:26%; width:48%; height:0.58%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Em Sherif in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Em+Sherif+Cairo"
-           style="top:76.04%; left:26%; width:48%; height:0.50%;"></a>
+           style="top:79.91%; left:26%; width:48%; height:0.58%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Kasr El Kababgy in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Kasr+El+Kababgy+Cairo"
-           style="top:76.63%; left:26%; width:48%; height:0.50%;"></a>
+           style="top:80.56%; left:26%; width:48%; height:0.58%;"></a>
         <a class="hotspot" target="_blank" rel="noopener" aria-label="Zooba in Maps"
            href="https://www.google.com/maps/search/?api=1&query=Zooba+Cairo"
-           style="top:77.23%; left:26%; width:48%; height:0.50%;"></a>
+           style="top:81.21%; left:26%; width:48%; height:0.58%;"></a>
 
         <!-- RSVP (heading + tagline) -->
         <a class="hotspot" data-rsvp target="_blank" rel="noopener"
            aria-label="RSVP"
-           style="top:90.9%; left:25%; width:50%; height:1.5%;"></a>
+           style="top:94.50%; left:25%; width:50%; height:2.90%;"></a>
       </nav>
     </div>
 
@@ -157,6 +140,6 @@
     </p>
   </main>
 
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=8"></script>
 </body>
 </html>
