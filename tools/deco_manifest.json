@@ -1,15 +1,16 @@
 {
-  "_note": "All hero + tree assets are EXTRACTED straight from the OG (Artboard 11@2.f5.png) at their exact bbox so size/position match the original. alpha='sky' for the hero (moon+fronds, branch); default diff-alpha for trees the base is missing (it captures the silver palm against the identical background). Trees animate as palms (gentle wind sway). OG out&about has 2 lanterns kept (lower-left + right). top/left/width recomputed from trimmed content.",
+  "_note": "All hero + tree assets are CUTOUT PNGs from 'Assets to be animated' (crisp), placed at the OG positions. Moon=29, branch=31, all palms=Asset 70 (silver feather palm, matches the OG palms). fronds-overlay is listed AFTER the moon so it paints on top -> moon behind fronds. stars-restaurants stays an OG diff-extract (it's a faint star field, approved). top/left/width = % of base (1177x12067). class drives animation.",
   "deco": [
-    {"slug": "branch-top-left",      "extract": true, "alpha": "sky", "ogLeft": 0.0,  "ogTop": 0.0,  "ogW": 49.0, "ogH": 5.4,  "class": "floral",  "flip": false},
-    {"slug": "moon-top-right",       "extract": true, "alpha": "sky", "ogLeft": 47.0, "ogTop": 0.0,  "ogW": 53.0, "ogH": 5.4,  "class": "moon",    "flip": false},
-    {"slug": "tree-hero-left",       "extract": true, "ogLeft": 0.0,  "ogTop": 6.0,  "ogW": 16.0, "ogH": 10.0, "class": "palm",    "flip": false},
-    {"slug": "tree-wedding-left",    "extract": true, "ogLeft": 0.0,  "ogTop": 21.0, "ogW": 19.0, "ogH": 11.0, "class": "palm",    "flip": false},
-    {"slug": "branch-transport-left","extract": true, "ogLeft": 0.0,  "ogTop": 53.0, "ogW": 20.0, "ogH": 9.0,  "class": "palm",    "flip": false},
-    {"slug": "lantern-out-lower",    "src": "Asset 47@2x.png", "top": 70.0, "left": 16.5, "width": 5.0, "class": "lantern", "flip": false},
-    {"slug": "lantern-out-right",    "src": "Asset 46@2x.png", "top": 58.8, "left": 84.5, "width": 5.0, "class": "lantern", "flip": false},
-    {"slug": "tree-rest-right",      "extract": true, "ogLeft": 74.0, "ogTop": 71.0, "ogW": 26.0, "ogH": 10.0, "class": "palm",    "flip": false},
-    {"slug": "stars-restaurants",    "extract": true, "ogLeft": 0.0,  "ogTop": 79.0, "ogW": 22.0, "ogH": 4.6,  "class": "star",    "flip": false},
-    {"slug": "tree-rsvp-right",      "extract": true, "ogLeft": 78.0, "ogTop": 86.0, "ogW": 22.0, "ogH": 12.0, "class": "palm",    "flip": false}
+    {"slug": "branch-top-left",   "src": "Asset 31@2x.png", "top": -1.0,  "left": -1.0,  "width": 49.0, "class": "floral",  "flip": false},
+    {"slug": "moon-top-right",    "src": "Asset 29@2x.png", "top": 0.5,   "left": 52.0,  "width": 37.0, "class": "moon",    "flip": false},
+    {"slug": "fronds-top-right",  "src": "Asset 70@2x.png", "top": -6.0,  "left": 86.0,  "width": 20.0, "class": "palm",    "flip": false},
+    {"slug": "tree-hero-left",    "src": "Asset 70@2x.png", "top": 5.5,   "left": -2.0,  "width": 17.0, "class": "palm",    "flip": false},
+    {"slug": "tree-wedding-left", "src": "Asset 70@2x.png", "top": 19.0,  "left": -1.0,  "width": 21.0, "class": "palm",    "flip": false},
+    {"slug": "tree-transport-left","src": "Asset 70@2x.png","top": 52.0,  "left": -1.0,  "width": 21.0, "class": "palm",    "flip": false},
+    {"slug": "lantern-out-lower", "src": "Asset 47@2x.png", "top": 70.0,  "left": 16.5,  "width": 5.0,  "class": "lantern", "flip": false},
+    {"slug": "lantern-out-right", "src": "Asset 46@2x.png", "top": 58.8,  "left": 84.5,  "width": 5.0,  "class": "lantern", "flip": false},
+    {"slug": "tree-rest-right",   "src": "Asset 70@2x.png", "top": 72.0,  "left": 77.0,  "width": 23.0, "class": "palm",    "flip": true},
+    {"slug": "stars-restaurants", "extract": true, "ogLeft": 0.0, "ogTop": 79.0, "ogW": 22.0, "ogH": 4.6, "top": 79.0, "left": 0.0, "width": 22.0, "class": "star", "flip": false},
+    {"slug": "tree-rsvp-right",   "src": "Asset 70@2x.png", "top": 85.0,  "left": 75.0,  "width": 25.0, "class": "palm",    "flip": false}
   ]
 }
