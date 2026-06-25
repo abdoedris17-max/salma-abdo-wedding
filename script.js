@@ -17,9 +17,9 @@ const CONFIG = {
   HYATT_SPECIAL_RATE_URL:
     "https://www.hyatt.com/events/en-US/group-booking/HBERC/G-SAA1",
 
-  /* Venue map — 9 Pyramids Lounge (Google Maps share link). */
+  /* Venue map — 9 Pyramids Lounge (Google Maps link). */
   VENUE_MAP_URL:
-    "https://share.google/7OJcnQO3AyXFnV5aC",
+    "https://maps.app.goo.gl/gfRGdi3uq9RM86dy7?g_st=iw",
 };
 
 /* -------------------------------------------------------------------------- */
