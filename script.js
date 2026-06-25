@@ -17,9 +17,9 @@ const CONFIG = {
   HYATT_SPECIAL_RATE_URL:
     "https://www.hyatt.com/events/en-US/group-booking/HBERC/G-SAA1",
 
-  /* Venue map (confirmed: 9 Arena, Pyramids of Giza). */
+  /* Venue map — 9 Pyramids Lounge (Google Maps share link). */
   VENUE_MAP_URL:
-    "https://www.google.com/maps/search/?api=1&query=9+Arena+Pyramids+of+Giza",
+    "https://share.google/7OJcnQO3AyXFnV5aC",
 };
 
 /* -------------------------------------------------------------------------- */

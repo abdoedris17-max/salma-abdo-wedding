@@ -35,3 +35,6 @@ screenshots of current*/
 _work/
 tools/_*.py
 tools/deco_tags.html
+
+# Generated shareable PDF (regenerate with tools/make_pdf.py) — not deployed
+Salma and Abdo Wedding Invitation.pdf
