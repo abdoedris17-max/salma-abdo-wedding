@@ -1,7 +1,7 @@
 """
 Build a single-page, shareable PDF of the invitation with every link clickable.
 
-Embeds the high-res artwork (Artboard 11@3x version final final.png) as one tall
+Embeds the high-res artwork (Website @ final eng, 6pm 0627.png) as one tall
 page and overlays the 25 hotspot links from index.html as PDF link annotations
 (the 4 JS-wired URLs are read from script.js CONFIG). The % positions are the
 same ones the website uses, so the links land on the printed labels.
@@ -15,7 +15,7 @@ from PIL import Image
 from reportlab.pdfgen import canvas
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "Artboard 11@3x version final final.png"
+SRC = ROOT / "Website @ final eng, 6pm 0627.png"
 OUT = ROOT / "Salma and Abdo Wedding Invitation.pdf"
 PAGE_W = 480.0                       # points; height follows the image aspect
 

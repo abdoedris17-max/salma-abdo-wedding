@@ -2,7 +2,7 @@
 Build the web asset for the Salma & Abdo invitation.
 
 The invitation is ONE tall illustration with all text and decoration baked in.
-Source artwork (git-ignored): Artboard 11@3x version final final.png  (1170 x 11446)
+Source artwork (git-ignored): Website @ final eng, 6pm 0627.png  (1176 x 11506)
 
   base output : assets/invitation.webp   (primary)  +  assets/invitation.jpg  (fallback)
 
@@ -18,7 +18,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "Artboard 11@3x version final final.png"
+SRC = ROOT / "Website @ final eng, 6pm 0627.png"
 OUT = ROOT / "assets"
 
 BASE_W = 960          # web width (2x a <=480 column); capped at the source width (no upscale)
